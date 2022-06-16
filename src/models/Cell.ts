@@ -18,12 +18,29 @@ export class Cell {
     color: Colors,
     figure: Figure | null
   ) {
-      this.x = x;
-      this.y = y;
-      this.board = board;
-      this.available = false;
-      this.color = color;
-      this.id = Math.random();
-      this.figure = figure;
+    this.x = x;
+    this.y = y;
+    this.board = board;
+    this.available = false;
+    this.color = color;
+    this.id = Math.random();
+    this.figure = figure;
+  }
+
+  isEmptyVertical(target: Cell): boolean {
+    if (this.x !== target.x) {
+      return false
+    }
+    return true
+  }
+  isEmptyHorisontal(target: Cell): boolean {return true}
+  isEmptyDiagonal(target: Cell): boolean {return true}
+
+  moveFigure(target: Cell) {
+    if (this.figure && this.figure.canMove(target)) {
+      this.figure.canMove(target);
+      target.figure = this.figure;
+      this.figure = null;
+    }
   }
 }
